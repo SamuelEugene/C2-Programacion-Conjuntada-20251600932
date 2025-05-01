@@ -1,0 +1,59 @@
+-- Crear base de datos
+CREATE DATABASE Sistema_Escolar;
+USE Sistema_Escolar;
+
+-- Tabla: Estudiantes
+CREATE TABLE Estudiantes (
+    id_estudiante INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    fecha_nacimiento DATE,
+    genero ENUM('M', 'F'),
+    id_direccion INT,
+    FOREIGN KEY (id_direccion) REFERENCES Direcciones(id_direccion)
+);
+
+-- Tabla: Direcciones
+CREATE TABLE Direcciones (
+    id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+    calle VARCHAR(150),
+    ciudad VARCHAR(100),
+    provincia VARCHAR(100),
+    codigo_postal VARCHAR(10)
+);
+
+-- Tabla: Departamentos
+CREATE TABLE Departamento (
+    id_departamento INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    descripcion TEXT
+);
+
+-- Tabla: Profesores
+CREATE TABLE Profesores (
+    id_profesor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    email VARCHAR(100),
+    id_departamento INT,
+    FOREIGN KEY (id_departamento) REFERENCES Departamento(id_departamento)
+);
+
+-- Tabla: Curso
+CREATE TABLE Curso (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    descripcion TEXT,
+    id_profesor INT,
+    FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor)
+);
+
+-- Tabla: Matriculas
+CREATE TABLE Matriculas (
+    id_matricula INT AUTO_INCREMENT PRIMARY KEY,
+    id_estudiante INT,
+    id_curso INT,
+    fecha_matricula DATE,
+    FOREIGN KEY (id_estudiante) REFERENCES Estudiantes(id_estudiante),
+    FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
