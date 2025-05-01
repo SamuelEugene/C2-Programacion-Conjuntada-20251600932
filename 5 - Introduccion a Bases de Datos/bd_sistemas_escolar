@@ -1,3 +1,4 @@
+-- Active: 1746129719109@@127.0.0.1@3306@sistema_escolar
 -- Crear base de datos
 CREATE DATABASE Sistema_Escolar;
 USE Sistema_Escolar;
